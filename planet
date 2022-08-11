@@ -1,0 +1,76 @@
+package com.javasspro;
+
+import java.util.*;
+class planet
+{
+	static int m_count(ArrayList<Integer> m,ArrayList<String> r) {
+		int count=0;
+		for(int i=0;i<6;i++) {
+			if(r.get(i)=="Yes")
+				count+=m.get(i);
+		}
+		return count;
+	}
+	static String g_max(ArrayList<String> g) {
+		HashMap<String,Integer> g_count=new HashMap<String,Integer>();
+		int max=0;
+		String s="";
+		for(int i=1;i<6;i++) {
+			String[] g1= g.get(i).split(",");
+			for(int j=0;j<g1.length;j++) {
+			if(g_count.containsKey(g1[j])){
+				g_count.put(g1[j], g_count.get(g1[j])+1);
+			}
+			else {
+				
+				g_count.put(g1[j],1);
+			}
+			}
+		}
+			for(Map.Entry<String,Integer> entry : g_count.entrySet()) {
+				if((int)entry.getValue()>max) {
+					max=(int)entry.getValue();
+					s=""+entry.getKey();
+				}
+				else if((int)entry.getValue()==max) {
+					s+=(","+entry.getKey());
+				}
+			}
+		return s;
+	}
+	public static void main(String[] args) {
+		ArrayList<String> name=new ArrayList<String>();
+		name.add("Mercury");
+		name.add("Venus");
+		name.add("Earth");
+		name.add("Jupiter");
+		name.add("Saturn");
+		name.add("Uranus");
+		ArrayList<String> gas=new ArrayList<String>();
+		gas.add("");
+		gas.add("Carbon Dioxide,Nitrogen");
+		gas.add("Nitrogen,Oxygen");
+		gas.add("Hydrogen,Helium");
+		gas.add("Hydrogen,Helium");
+		gas.add("Hydrogen,Helium,Methane");
+		ArrayList<Integer> moons=new ArrayList<Integer>();
+		moons.add(0);
+		moons.add(0);
+		moons.add(1);
+		moons.add(79);
+		moons.add(83);
+		moons.add(27);
+//		for(int i=0;i<moons.size();i++) {
+//			System.out.println(moons.get(i));
+//		}
+		ArrayList<String> rings=new ArrayList<String>();
+		rings.add("No");
+		rings.add("No");
+		rings.add("No");
+		rings.add("Yes");
+		rings.add("Yes");
+		rings.add("Yes");
+		System.out.println("Count of moons of planets having rings:"+m_count(moons,rings));
+		System.out.println("Gases found in most of planets:"+g_max(gas));
+	}
+}
